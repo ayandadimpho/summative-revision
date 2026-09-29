@@ -12,6 +12,19 @@ public class Schema {
                 contact VARCHAR(20) NOT NULL
                 )
                 """;
+        String appointmentSql = """
+                CREATE TABLE appointments(
+                appointment_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                patient_id INTEGER NOT NULL,
+                FOREIGN KEY(patient_id) REFERENCES patients(patient_id),
+                appointment_date TEXT NOT NULL,
+                appointment_time TEXT NOT NULL
+                )
+                """;
+
+        try (Statement statement = connection.createStatement()) {
+            statement.executeUpdate(appointmentSql);
+        }
 
     }
 }
